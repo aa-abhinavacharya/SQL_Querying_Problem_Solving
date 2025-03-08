@@ -62,6 +62,10 @@ FROM	schools
 GROUP BY decade
 ORDER BY decade;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution1-2.JPG)
+
 **3.Top Schools Overall: Identify the top 5 schools that produced the most players.**
  ```sql
 SELECT	 sd.name_full, COUNT(DISTINCT s.playerID) AS num_players
@@ -71,6 +75,11 @@ GROUP BY s.schoolID
 ORDER BY num_players DESC
 LIMIT 	 5;
 ```
+
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution1-3.JPG)
+
 **4.Top Schools by Decade: For each decade, list the top 3 schools with the highest number of player alumni.**
  ```sql
 WITH ds AS (SELECT	 FLOOR(s.yearID / 10) * 10 AS decade, sd.name_full, COUNT(DISTINCT s.playerID) AS num_players
@@ -89,6 +98,10 @@ FROM	rn
 WHERE	row_num <= 3
 ORDER BY decade DESC, row_num;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution1-4.JPG)
+
 ## PART II: SALARY ANALYSIS
 
 **🔎 Steps:**
@@ -113,6 +126,9 @@ SELECT	teamID, ROUND(avg_spend / 1000000, 1) AS avg_spend_millions
 FROM	sp
 WHERE	spend_pct = 1;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution2-2.JPG)
 
 **3. For each team, show the cumulative sum of spending over the years.**
 ```sql
@@ -126,6 +142,9 @@ SELECT	teamID, yearID,
 			AS cumulative_sum_millions
 FROM	ts;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution2-3.JPG)
 
 **4. Return the first year that each team's cumulative spending surpassed 1 billion.**
 ```sql
@@ -148,6 +167,11 @@ SELECT teamID, yearID, ROUND(cumulative_sum / 1000000000, 2) AS cumulative_sum_b
 FROM	rn
 WHERE	rn = 1;
 ```
+
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution2-4.JPG)
+
 ## PART III: PLAYER CAREER ANALYSIS
 
 **1. View the players table and find the number of players in the table**
@@ -168,6 +192,9 @@ SELECT 	nameGiven,
 FROM	players
 ORDER BY career_length DESC;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution3-2.JPG)
 
 **3. What team did each player play on for their starting and ending years?**
 ```sql
@@ -181,6 +208,9 @@ FROM	players p INNER JOIN salaries s
 							ON p.playerID = e.playerID
 							AND YEAR(p.finalGame) = e.yearID;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution3-3.JPG)
 
 **4. How many players started and ended on the same team and also played for over a decade?**
 
@@ -196,6 +226,10 @@ FROM	players p INNER JOIN salaries s
 							AND YEAR(p.finalGame) = e.yearID
 WHERE	s.teamID = e.teamID AND e.yearID - s.yearID > 10;
 ```
+
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution3-4.JPG)
 
 ## PART IV: PLAYER COMPARISON ANALYSIS
 
@@ -217,6 +251,9 @@ WHERE	YEAR(birthdate) BETWEEN 1980 AND 1990
 GROUP BY birthdate
 ORDER BY birthdate;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution4-2.JPG)
 
 **3. Create a summary table that shows for each team, what percent of players bat right, left and both.**
 ```sql
@@ -231,6 +268,10 @@ SELECT teamID,
 FROM up
 GROUP BY teamID;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution4-3.JPG)
+
 
 **4. How have average height and weight at debut game changed over the years, and what's the decade-over-decade difference?**
 
@@ -246,6 +287,9 @@ SELECT	decade,
 FROM	hw
 WHERE	decade IS NOT NULL;
 ```
+Result :-
+
+![Alt text](https://github.com/aa-abhinavacharya/Sports_Data_Analytics_MLB_Project1/blob/main/solution4-4.JPG)
 
 ## CONCLUSION 
 
